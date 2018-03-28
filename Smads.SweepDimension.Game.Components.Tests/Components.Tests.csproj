@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameBoard3dPieceTests.cs" />
     <Compile Include="GameBoard3dTests.cs" />
     <Compile Include="GameStateTests.cs" />
     <Compile Include="GameRulesTests.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="GameBoard2dTests.cs" />
     <Compile Include="GameTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GameBoard2dPieceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
