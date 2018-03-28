@@ -40,6 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameBoard3d.cs" />
+    <Compile Include="GameBoard2d.cs" />
+    <Compile Include="GamePiece.cs" />
+    <Compile Include="GameRules.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="Interfaces\IGameBoard.cs" />
     <Compile Include="Interfaces\IGamePiece.cs" />
     <Compile Include="Interfaces\IGameRules.cs" />

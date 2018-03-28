@@ -48,19 +48,21 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameBoard3dTests.cs" />
     <Compile Include="GameStateTests.cs" />
     <Compile Include="GameRulesTests.cs" />
     <Compile Include="GamePieceTests.cs" />
-    <Compile Include="GameBoardTests.cs" />
+    <Compile Include="GameBoard2dTests.cs" />
+    <Compile Include="GameTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Smads.SweepDimension.Components\Smads.SweepDimension.Game.Components.csproj">
+    <ProjectReference Include="..\Smads.SweepDimension.Game.Components\Components.csproj">
       <Project>{9351edd6-adcd-400e-b66d-143ec2a37a65}</Project>
-      <Name>Smads.SweepDimension.Game.Components</Name>
+      <Name>Components</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

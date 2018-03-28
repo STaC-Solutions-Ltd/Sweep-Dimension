@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace Smads.SweepDimension.Game.Components.Interfaces
 {
-    interface IGameRules
+    public interface IGamePiece
     {
-        Double CalculateScore(IGameState state);
+        int Sides { get;  }
 
-        bool WinConditionMet(IGameState state);
+        bool MainState { get; }
 
-        bool LoseConditionMet(IGameState state);
+        bool Visible { get; }
+
+        void ToggleState();
+
+        void ToggleVisibility();
     }
 }
