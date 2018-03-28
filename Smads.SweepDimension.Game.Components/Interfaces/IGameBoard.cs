@@ -16,16 +16,18 @@ namespace Smads.SweepDimension.Game.Components.Interfaces
 
         int GetLocationCount();
 
-        //IEnumerable<IEnumerable<int>> GetAdjacentLocations(IEnumerable<int> location);
-
-        IEnumerable<IGamePiece> GetPiecesInLocation(IEnumerable<int> location);
-
-        //IEnumerable<IGamePiece> GetAdjacentPieces(IGamePiece piece);
+        IEnumerable<IEnumerable<int>> GetAdjacentLocations(IEnumerable<int> location);
 
         void PlacePiece(IGamePiece piece, IEnumerable<int> location);
 
-        //void MovePiece(IGamePiece piece, IEnumerable<int> location);
+        IEnumerable<int> GetPiecesLocation(IGamePiece piece);
 
-        //void RemovePiece(IGamePiece piece, IEnumerable<int> location);
+        IEnumerable<IGamePiece> GetPiecesInLocation(IEnumerable<int> location);
+
+        IEnumerable<IGamePiece> GetAdjacentPieces(IGamePiece piece);
+
+        void MovePiece(IGamePiece piece, IEnumerable<int> destLocation);
+
+        void RemovePiece(IGamePiece piece);
     }
 }

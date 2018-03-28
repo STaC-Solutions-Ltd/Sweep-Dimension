@@ -96,6 +96,27 @@ namespace Smads.SweepDimension.Game.Components.Tests
             Assert.AreEqual(noOfTiles, gameBoard.GetLocationCount());
         }
 
-        
+        [DataTestMethod]
+        [DataRow(new int[] { 1, 1 }, new int[] { 0, 0 }, 0)]
+
+        [DataRow(new int[] { 10, 12 }, new int[] { 0, 0 }, 3)]
+        [DataRow(new int[] { 5, 5 }, new int[] { 4, 4 }, 3)]
+        [DataRow(new int[] { 5, 5 }, new int[] { 0, 4 }, 3)]
+        [DataRow(new int[] { 5, 5 }, new int[] { 4, 0 }, 3)]
+
+        [DataRow(new int[] { 10, 12 }, new int[] { 1, 0 }, 5)]
+        [DataRow(new int[] { 5, 5 }, new int[] { 3, 4 }, 5)]
+        [DataRow(new int[] { 5, 5 }, new int[] { 0, 3 }, 5)]
+        [DataRow(new int[] { 5, 5 }, new int[] { 4, 1 }, 5)]
+
+        [DataRow(new int[] { 5, 5 }, new int[] { 2, 2 }, 8)]
+        public void GetAdjacentLocations(int[] dimensions, int[] location, int expected)
+        {
+            var gameBoard = new GameBoard2d(dimensions, 4);
+
+            var adjacentLocations = gameBoard.GetAdjacentLocations(location);
+
+            Assert.AreEqual(expected, adjacentLocations.Count());
+        }
     }
 }
