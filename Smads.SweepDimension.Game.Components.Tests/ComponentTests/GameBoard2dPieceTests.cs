@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Smads.SweepDimension.Game.Components.Interfaces;
+using Smads.SweepDimension.Game.Components.MovementStrategies;
 
 namespace Smads.SweepDimension.Game.Components.Tests
 {
@@ -17,7 +18,7 @@ namespace Smads.SweepDimension.Game.Components.Tests
         {
             var gameBoard = new GameBoard2d(dimensions, 4);
 
-            var piece = new GamePiece(4, true, true);
+            var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
 
             gameBoard.PlacePiece(piece, location);
 
@@ -38,7 +39,7 @@ namespace Smads.SweepDimension.Game.Components.Tests
         {
             var gameBoard = new GameBoard2d(dimensions, 4);
 
-            var piece = new GamePiece(4, true, true);
+            var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
 
             gameBoard.PlacePiece(piece, location);
 
@@ -66,7 +67,7 @@ namespace Smads.SweepDimension.Game.Components.Tests
         {
             var gameBoard = new GameBoard2d(dimensions, 4);
 
-            var piece = new GamePiece(4, true, true);
+            var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
 
             gameBoard.PlacePiece(piece, location);
         }
@@ -83,7 +84,7 @@ namespace Smads.SweepDimension.Game.Components.Tests
 
             for (var i = 0; i < noOfPieces; i++)
             {
-                var piece = new GamePiece(3, true, true);
+                var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
 
                 gameBoard.PlacePiece(piece, location);
             }
@@ -102,7 +103,7 @@ namespace Smads.SweepDimension.Game.Components.Tests
         {
             var gameBoard = new GameBoard2d(dimensions, 4);
 
-            var piece = new GamePiece(4, true, true);
+            var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => gameBoard.PlacePiece(piece, location));
         }
@@ -114,7 +115,7 @@ namespace Smads.SweepDimension.Game.Components.Tests
         {
             var gameBoard = new GameBoard2d(dimensions, 4);
 
-            var piece = new GamePiece(4, true, true);
+            var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
 
             gameBoard.PlacePiece(piece, location);
 
@@ -162,7 +163,7 @@ namespace Smads.SweepDimension.Game.Components.Tests
             {
                 for (var j = 0; j < y; j++)
                 {
-                    gameBoard.PlacePiece(new GamePiece(4, true, true), new[] { i, j });
+                    gameBoard.PlacePiece(new GamePiece(-1, "Test", new NoMovementStrategy(), true), new[] { i, j });
                 }
             }
 
@@ -181,7 +182,7 @@ namespace Smads.SweepDimension.Game.Components.Tests
         {
             var gameBoard = new GameBoard2d(dimensions, 4);
 
-            var piece = new GamePiece(4, true, true);
+            var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
 
             gameBoard.PlacePiece(piece, location);
 
@@ -197,7 +198,7 @@ namespace Smads.SweepDimension.Game.Components.Tests
         {
             var gameBoard = new GameBoard2d(dimensions, 4);
 
-            var piece = new GamePiece(4, true, true);
+            var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
 
             gameBoard.PlacePiece(piece, location);
 
@@ -214,7 +215,7 @@ namespace Smads.SweepDimension.Game.Components.Tests
         {
             var gameBoard = new GameBoard2d(dimensions, 4);
 
-            var piece = new GamePiece(4, true, true);
+            var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
 
             gameBoard.PlacePiece(piece, location);
 
@@ -243,5 +244,32 @@ namespace Smads.SweepDimension.Game.Components.Tests
             Assert.IsNotNull(resultingPieces.FirstOrDefault());
         }
 
+        [DataTestMethod]
+        [DataRow(new int[] { 1, 2 }, new int[] { 0, 1 })]
+        [DataRow(new int[] { 10, 12 }, new int[] { 5, 3 })]
+        [DataRow(new int[] { 5, 5 }, new int[] { 2, 3 })]
+        public void CannotAddSamePieceTwice(int[] dimensions, int[] location)
+        {
+            var gameBoard = new GameBoard2d(dimensions, 4);
+
+            var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
+
+            gameBoard.PlacePiece(piece, location);
+
+            Assert.ThrowsException<ArgumentException>(() => gameBoard.PlacePiece(piece, location));
+        }
+
+        [DataTestMethod]
+        [DataRow(new int[] { 1, 2 }, new int[] { 0, 1 })]
+        [DataRow(new int[] { 10, 12 }, new int[] { 5, 3 })]
+        [DataRow(new int[] { 5, 5 }, new int[] { 2, 3 })]
+        public void CannotRemovePieceThatIsNotAdded(int[] dimensions, int[] location)
+        {
+            var gameBoard = new GameBoard2d(dimensions, 4);
+
+            var piece = new GamePiece(-1, "Test", new NoMovementStrategy(), true);
+
+            Assert.ThrowsException<ArgumentException>(() => gameBoard.RemovePiece(piece));
+        }
     }
 }

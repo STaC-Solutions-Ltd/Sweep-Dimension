@@ -13,7 +13,7 @@ namespace Smads.SweepDimension.Game.Components
         public IGameRules Rules { get; private set; }
         public IGameBoard Board { get; private set; }
         public DateTime StartTime { get; private set; }
-        public TimeSpan ElapsedTime { get; private set; }
+        public TimeSpan ElapsedTime { get { return EndTime - StartTime; } }
         public DateTime EndTime { get; private set; }
         public double Score { get; private set; }
 
@@ -24,24 +24,42 @@ namespace Smads.SweepDimension.Game.Components
             Rules = rules;
         }
 
-        public void CalculateScore()
+        public void StartGame()
         {
-            throw new NotImplementedException();
+            if (StartTime != DateTime.MinValue)
+            {
+                throw new InvalidOperationException("Game is already started.");
+            }
+
+            StartTime = DateTime.Now;
         }
 
         public void EndGame()
         {
-            throw new NotImplementedException();
+            if (StartTime == DateTime.MinValue)
+            {
+                throw new InvalidOperationException("Game is not started.");
+            }
+
+            EndTime = DateTime.Now;
         }
 
-        public void StartGame()
+        public void CalculateScore()
         {
-            throw new NotImplementedException();
+            Score = Rules.CalculateScore(this);
         }
 
         public void UpdateState()
         {
-            throw new NotImplementedException();
+            CalculateScore();
+
+            var win = Rules.WinConditionMet(this);
+            var lose = Rules.LoseConditionMet(this);
+
+            if((win || lose) && StartTime != DateTime.MinValue && EndTime == DateTime.MinValue)
+            {
+                EndGame();
+            }
         }
     }
 }

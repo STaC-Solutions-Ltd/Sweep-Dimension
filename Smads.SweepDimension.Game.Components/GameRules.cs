@@ -9,6 +9,18 @@ namespace Smads.SweepDimension.Game.Components
 {
     public class GameRules : IGameRules
     {
+        IScoringStrategy _scoringStrategy;
+        IGameOverStrategy _winStrategy;
+        IGameOverStrategy _loseStrategy;
+
+
+        public GameRules(IGameOverStrategy winStrategy, IGameOverStrategy loseStrategy, IScoringStrategy scoringStrategy)
+        {
+            _scoringStrategy = scoringStrategy;
+            _winStrategy = winStrategy;
+            _loseStrategy = loseStrategy;
+        }
+
         /// <summary>
         /// Based on the passed in state calculate the current score
         /// </summary>
@@ -16,7 +28,7 @@ namespace Smads.SweepDimension.Game.Components
         /// <returns>Score</returns>
         public double CalculateScore(IGameState state)
         {
-            throw new NotImplementedException();
+            return _scoringStrategy.CalculateScore(state);
         }
 
         /// <summary>
@@ -26,7 +38,7 @@ namespace Smads.SweepDimension.Game.Components
         /// <returns>Game has been lost</returns>
         public bool LoseConditionMet(IGameState state)
         {
-            throw new NotImplementedException();
+            return _loseStrategy.IsCriteriaMet(state);
         }
 
         /// <summary>
@@ -36,7 +48,7 @@ namespace Smads.SweepDimension.Game.Components
         /// <returns>Game has been won</returns>
         public bool WinConditionMet(IGameState state)
         {
-            throw new NotImplementedException();
+            return _winStrategy.IsCriteriaMet(state);
         }
     }
 }

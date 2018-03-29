@@ -48,15 +48,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameBoard3dPieceTests.cs" />
-    <Compile Include="GameBoard3dTests.cs" />
-    <Compile Include="GameStateTests.cs" />
-    <Compile Include="GameRulesTests.cs" />
-    <Compile Include="GamePieceTests.cs" />
-    <Compile Include="GameBoard2dTests.cs" />
+    <Compile Include="ComponentTests\GameStateTests.cs" />
+    <Compile Include="ComponentTests\GameRulesTests.cs" />
+    <Compile Include="ComponentTests\GamePieceTests.cs" />
+    <Compile Include="ComponentTests\GameBoard2dTests.cs" />
+    <Compile Include="GameOverStrategyTests\TestGameOverStrategy.cs" />
+    <Compile Include="GameOverStrategyTests\GameOverStrategyTests.cs" />
     <Compile Include="GameTests.cs" />
+    <Compile Include="MovementStrategyTests\TestMovementStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GameBoard2dPieceTests.cs" />
+    <Compile Include="ComponentTests\GameBoard2dPieceTests.cs" />
+    <Compile Include="ScoringStrategyTests\ScoringStrategyTests.cs" />
+    <Compile Include="ScoringStrategyTests\TestScoringStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -67,6 +70,7 @@
       <Name>Components</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -9,9 +9,11 @@ namespace Smads.SweepDimension.Game.Components
 {
     public class GamePiece : IGamePiece
     {
-        public int Sides { get; private set; }
+        public int TypeID { get; private set; }
 
-        public bool MainState { get; private set; }
+        public string TypeName { get; private set; }
+
+        private IMovementStrategy _movementStrategy;
 
         public bool Visible { get; private set; }
 
@@ -21,19 +23,12 @@ namespace Smads.SweepDimension.Game.Components
         /// <param name="sides">No of sides the game piece should have.</param>
         /// <param name="mainState">Default or alt state</param>
         /// <param name="visible">Set initial piece visibility</param>
-        public GamePiece(int sides, bool mainState, bool visible)
+        public GamePiece(int typeID, string typeName, IMovementStrategy movementStrategy, bool visible)
         {
-            Sides = sides;
-            MainState = mainState;
+            TypeID = typeID;
+            TypeName = typeName;
             Visible = visible;
-        }
-
-        /// <summary>
-        /// Toggle State 
-        /// </summary>
-        public void ToggleState()
-        {
-            MainState = !MainState;
+            _movementStrategy = movementStrategy;
         }
 
         /// <summary>
@@ -42,6 +37,11 @@ namespace Smads.SweepDimension.Game.Components
         public void ToggleVisibility()
         {
             Visible = !Visible;
+        }
+
+        public IEnumerable<int[]> LegalMoves()
+        {
+            return _movementStrategy.GetLegalMoves();
         }
     }
 }

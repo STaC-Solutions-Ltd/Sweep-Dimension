@@ -8,14 +8,14 @@ namespace Smads.SweepDimension.Game.Components.Interfaces
 {
     public interface IGamePiece
     {
-        int Sides { get;  }
+        int TypeID { get; }
 
-        bool MainState { get; }
+        string TypeName { get; }
 
         bool Visible { get; }
 
-        void ToggleState();
-
         void ToggleVisibility();
+
+        IEnumerable<int[]> LegalMoves();
     }
 }

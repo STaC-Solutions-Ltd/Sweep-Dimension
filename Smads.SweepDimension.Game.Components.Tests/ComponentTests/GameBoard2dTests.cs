@@ -118,5 +118,19 @@ namespace Smads.SweepDimension.Game.Components.Tests
 
             Assert.AreEqual(expected, adjacentLocations.Count());
         }
+
+        [DataTestMethod]
+        [DataRow(new int[] { 1 })]
+        [DataRow(new int[] { 1, 2, 1 })]
+        public void CannotUseLocationWithWrongNumberOfDimensions(int[] location)
+        {
+            var sides = 4;
+
+            var board = new GameBoard2d(new[] { 10, 10 }, sides);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => board.GetAdjacentLocations(location));
+        }
+
+
     }
 }

@@ -71,10 +71,7 @@ namespace Smads.SweepDimension.Game.Components
         /// <param name="location">Location to add game piece.</param>
         public void PlacePiece(IGamePiece piece, IEnumerable<int> location)
         {
-            if (PiecesOnBoard.Contains(piece))
-            {
-                throw new ArgumentException("Piece already added to board.", "Piece");
-            }
+            CheckPieceIsNotOnBoard(piece);
 
             var validLocation = IsLocationValid(location.ToArray());
 
@@ -88,10 +85,7 @@ namespace Smads.SweepDimension.Game.Components
         /// <returns>The location of the piece</returns>
         public IEnumerable<int> GetPiecesLocation(IGamePiece piece)
         {
-            if (!PiecesOnBoard.Contains(piece))
-            {
-                throw new ArgumentException("Piece not currently on the board.", "Piece");
-            }
+            CheckPieceIsOnBoard(piece);
 
             return FindPiece(piece);
         }
@@ -115,10 +109,7 @@ namespace Smads.SweepDimension.Game.Components
         /// <returns>List of game pieces</returns>
         public IEnumerable<IGamePiece> GetAdjacentPieces(IGamePiece piece)
         {
-            if (!PiecesOnBoard.Contains(piece))
-            {
-                throw new ArgumentException("Piece not currently on the board.", "Piece");
-            }
+            CheckPieceIsOnBoard(piece);
 
             return getAdjacentPieces(piece);
         }
@@ -131,10 +122,7 @@ namespace Smads.SweepDimension.Game.Components
         /// <param name="destLocation">Location to move the piece to</param>
         public void MovePiece(IGamePiece piece, IEnumerable<int> destLocation)
         {
-            if (!PiecesOnBoard.Contains(piece))
-            {
-                throw new ArgumentException("Piece not currently on the board.", "Piece");
-            }
+            CheckPieceIsOnBoard(piece);
 
             var destinationLocation = IsLocationValid(destLocation.ToArray());
 
@@ -148,10 +136,7 @@ namespace Smads.SweepDimension.Game.Components
         /// <param name="piece">Piece to remove from the board</param>
         public void RemovePiece(IGamePiece piece)
         {
-            if (!PiecesOnBoard.Contains(piece))
-            {
-                throw new ArgumentException("Piece not currently on the board.", "Piece");
-            }
+            CheckPieceIsOnBoard(piece);
 
             DeletePiece(piece);
         }
@@ -297,6 +282,22 @@ namespace Smads.SweepDimension.Game.Components
             board[location[0], location[1]].Remove(piece);
 
             PiecesOnBoard.Remove(piece);
+        }
+
+        private void CheckPieceIsOnBoard(IGamePiece piece)
+        {
+            if (!PiecesOnBoard.Contains(piece))
+            {
+                throw new ArgumentException("Piece not currently on the board.", "Piece");
+            }
+        }
+
+        private void CheckPieceIsNotOnBoard(IGamePiece piece)
+        {
+            if (PiecesOnBoard.Contains(piece))
+            {
+                throw new ArgumentException("Piece is already on the board.", "Piece");
+            }
         }
 
         #endregion
